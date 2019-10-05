@@ -8,6 +8,7 @@ public class PowerHolder : MonoBehaviour
     [SerializeField]
     private int m_maxPower = 1;
 
+
     [SerializeField]
     private List<BallHolder> m_holders;
 
@@ -17,6 +18,7 @@ public class PowerHolder : MonoBehaviour
     public PowerType Type { get { return m_type; } }
 
     public int PowerLevel { get { return m_holders.Count(x => x.Powered); } }
+    public int MaxPower => m_maxPower;
 
     // Start is called before the first frame update
     void Start()

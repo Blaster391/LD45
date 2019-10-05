@@ -16,6 +16,14 @@ public class PowerPanel : MonoBehaviour
     private PowerHolder m_jumpPower;
     public PowerHolder JumpPower { get { return m_jumpPower; } }
 
+    [SerializeField]
+    private GameObject m_coreTether;
+    public GameObject CoreTether { get { return m_coreTether; } }
+
+    [SerializeField]
+    private GameObject m_abilityTether;
+    public GameObject AbilityTether { get { return m_abilityTether; } }
+
     void Start()
     {
         

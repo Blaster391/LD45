@@ -8,6 +8,9 @@ public class ScreenFX : MonoBehaviour
     private PowerPanel m_power;
 
     private List<GameObject> m_effectPoints = new List<GameObject>();
+    private bool m_endGame = false;
+
+    private bool m_disable = false;
 
     Material blackMaterial;
     Material blackAndWhiteMaterial;
@@ -28,14 +31,29 @@ public class ScreenFX : MonoBehaviour
         m_effectPoints.Add(effectPoint);
     }
 
+    public void SetEndGame(bool end)
+    {
+        m_endGame = true;
+    }
+
+    public void SetDisabled(bool disabled)
+    {
+        m_disable = disabled;
+    }
+
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        if(m_disable)
+        {
+            return;
+        }
+
         RenderTexture temp1 = RenderTexture.GetTemporary(source.width, source.height);
         RenderTexture temp2 = RenderTexture.GetTemporary(source.width, source.height);
 
         Material mainScreenMaterial = passThroughMaterial;
         //Power level check
-        if (m_power.CorePower.PowerLevel == 0)
+        if (m_power.CorePower.PowerLevel == 0 || m_endGame)
         {
             mainScreenMaterial = blackMaterial;
         }
@@ -47,12 +65,27 @@ public class ScreenFX : MonoBehaviour
 
         RenderTexture from = temp1;
         RenderTexture to = temp2;
-  
-        foreach(var point in m_effectPoints)
+
+        float radius = 0.2f;
+        foreach (var point in m_effectPoints)
         {
+            if(m_endGame)
+            {
+                radius = 0.6f;
+                EndGameScript endGame = point.GetComponent<EndGameScript>();
+                if(!endGame)
+                {
+                    continue;
+                }
+            }
             if (m_power.CorePower.PowerLevel == 0)
             {
-                Powerball ball = point.GetComponent<Powerball>();
+                EndGameScript endGame = point.GetComponent<EndGameScript>();
+                if (endGame)
+                {
+                    continue;
+                }
+                    Powerball ball = point.GetComponent<Powerball>();
                 if(!ball || ball.Type != PowerType.Core || ball.State == BallState.Free)
                 {
                     continue;
@@ -65,7 +98,7 @@ public class ScreenFX : MonoBehaviour
 
             if((pos.x > -1 || pos.x < 2) && (pos.y > -1 || pos.y < 2))
             {
-                float radius = 0.1f;
+                
                 pointMultiColourMaterial.SetTexture("_OriginalTex", source);
                 pointMultiColourMaterial.SetFloat("_radius", radius);
                 pointMultiColourMaterial.SetVector("_point", pos);

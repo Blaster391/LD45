@@ -20,7 +20,7 @@ public class Powerball : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject m_player;
+    Player m_player;
 
     [SerializeField]
     private PowerType m_type;
@@ -36,6 +36,8 @@ public class Powerball : MonoBehaviour
     float m_moveSpeed = 5.0f;
 
     [SerializeField]
+    float m_orbitSpeedRand = 1.0f;
+    [SerializeField]
     float m_orbitSpeed = 1.0f;
 
     [SerializeField]
@@ -44,11 +46,16 @@ public class Powerball : MonoBehaviour
     float m_bobSpeed = 0.25f;
 
     [SerializeField]
+    float m_orbitDistanceRand = 1.0f;
+    [SerializeField]
     float m_orbitDistance = 1.0f;
 
     float m_currentOrbit = 0.0f;
     float m_currentBob = 0.0f;
     Vector3 m_startingPosition;
+
+    [SerializeField]
+    float m_rotateSpeed = 1.0f;
 
     bool m_selected = false;
     public bool Selected { get { return m_selected; } }
@@ -59,6 +66,9 @@ public class Powerball : MonoBehaviour
         m_startingPosition = gameObject.transform.position;
         m_currentOrbit = Random.value * Mathf.PI * 2;
         m_currentBob = Random.value * Mathf.PI * 2;
+
+        m_orbitSpeed += m_orbitSpeedRand * Random.value;
+        m_orbitDistance += m_orbitDistanceRand * Random.value;
 
         Camera.main.gameObject.GetComponent<ScreenFX>().AddPointFX(gameObject);
     }
@@ -81,12 +91,24 @@ public class Powerball : MonoBehaviour
                 cursorPos = Camera.main.ScreenToWorldPoint(cursorPos);
                 gameObject.transform.position = cursorPos;
             }
+
         }
         else
         {
             if (m_state == BallState.Held && !m_selected)
             {
-                Vector3 targetPosition = m_player.transform.position;
+                Vector3 targetPosition = m_player.gameObject.transform.position;
+                gameObject.transform.parent = m_player.gameObject.transform;
+                if (m_type == PowerType.Core)
+                {
+                    targetPosition = m_player.PowerPanel.CoreTether.transform.position;
+                    gameObject.transform.parent = m_player.PowerPanel.CoreTether.transform;
+                }
+                else if(m_type == PowerType.Ability)
+                {
+                    targetPosition = m_player.PowerPanel.AbilityTether.transform.position;
+                    gameObject.transform.parent = m_player.PowerPanel.AbilityTether.transform;
+                }
 
                 targetPosition += new Vector3(Mathf.Sin(m_currentOrbit), Mathf.Cos(m_currentOrbit), 0) * m_orbitDistance;
 
@@ -111,6 +133,11 @@ public class Powerball : MonoBehaviour
                 m_currentBob += Time.deltaTime * m_bobSpeed;
             }
         }
+
+        //if (m_state != BallState.InUse)
+        //{
+            transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
+        //}
     }
 
     void OnMouseOver()
@@ -163,7 +190,7 @@ public class Powerball : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
-                m_player = col.gameObject;
+                m_player = col.gameObject.GetComponent<Player>();
                 m_state = BallState.Held;
             }
         }
