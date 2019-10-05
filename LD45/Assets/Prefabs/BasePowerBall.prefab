@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2740757931467971189}
   - component: {fileID: 2662728789840008375}
   - component: {fileID: 7930075932798113994}
+  - component: {fileID: 3957308604588667883}
   m_Layer: 0
   m_Name: BasePowerBall
   m_TagString: Untagged
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3ba4e94491f9d6349a89a50fda46dd3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,6 +94,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe908a18400d6d34ebb3231184262872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_player: {fileID: 0}
+  m_type: 0
+  m_state: 0
+  m_moveSpeed: 5
+  m_orbitSpeed: 1
+  m_bobDistance: 0.02
+  m_bobSpeed: 5
+  m_orbitDistance: 1
 --- !u!58 &7930075932798113994
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -109,3 +118,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!50 &3957308604588667883
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2740757931467971188}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

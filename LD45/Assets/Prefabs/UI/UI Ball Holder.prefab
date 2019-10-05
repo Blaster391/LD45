@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!50 &3103195273780097737
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759740837513326167}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &9044580028041291006
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759740837513326167}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!114 &3939070986591637195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1620f605e1aad084d957b7ebb787712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poweredSprite: {fileID: 21300000, guid: be69d0bf979903747a28a21ce73e3003, type: 3}
+  m_unpoweredSprite: {fileID: 21300000, guid: de78fa4916e1f7144a015519c17e72dd, type: 3}
 --- !u!1001 &331540439882491914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,6 +132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5437933274612991580, guid: 261343df40d1f5643b272750377a7726,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 261343df40d1f5643b272750377a7726, type: 3}

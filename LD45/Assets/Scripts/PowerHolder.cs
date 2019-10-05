@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PowerHolder : MonoBehaviour
@@ -15,7 +16,7 @@ public class PowerHolder : MonoBehaviour
 
     public PowerType Type { get { return m_type; } }
 
-    public int PowerLevel { get { return 1; } }
+    public int PowerLevel { get { return m_holders.Count(x => x.Powered); } }
 
     // Start is called before the first frame update
     void Start()
