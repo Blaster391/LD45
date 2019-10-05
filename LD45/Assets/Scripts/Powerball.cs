@@ -25,6 +25,7 @@ public class Powerball : MonoBehaviour
     [SerializeField]
     private PowerType m_type;
     public PowerType Type => m_type;
+    public BallState State => m_state;
 
     private BallHolder m_holder;
 
@@ -58,6 +59,8 @@ public class Powerball : MonoBehaviour
         m_startingPosition = gameObject.transform.position;
         m_currentOrbit = Random.value * Mathf.PI * 2;
         m_currentBob = Random.value * Mathf.PI * 2;
+
+        Camera.main.gameObject.GetComponent<ScreenFX>().AddPointFX(gameObject);
     }
 
     // Update is called once per frame
@@ -100,7 +103,7 @@ public class Powerball : MonoBehaviour
             }
             else if (m_state == BallState.InUse)
             {
-                gameObject.transform.localPosition = new Vector3(0,0, m_startingPosition.z);
+                gameObject.transform.localPosition = new Vector3(0,0, -1);
             }
             else if(m_state == BallState.Free)
             {

@@ -22,18 +22,53 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     private float m_groundedThreshold = 0.1f;
 
+    [SerializeField]
+    private float m_respawnTime = 3.0f;
+    [SerializeField]
+    private Checkpoint m_checkpoint;
+    public Checkpoint Checkpoint => m_checkpoint;
+
+    bool m_respawning = false;
+    float m_timeRespawning = 0.0f;
 
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_collider = GetComponent<BoxCollider2D>();
+
+        if (m_checkpoint)
+        {
+            m_checkpoint.SetActive();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessMovement();
+        if(m_respawning)
+        {
+            ProcessRespawn();
+        }
+        else
+        {
+            ProcessMovement();
+        }
 
+        if(transform.position.y < -25.0f)
+        {
+            Respawn();
+        }
+    }
+
+    public void SetCheckpoint(Checkpoint _checkpoint)
+    {
+        if (m_checkpoint)
+        {
+            m_checkpoint.SetInactive();
+        }
+
+        m_checkpoint = _checkpoint;
+        m_checkpoint.SetActive();
     }
 
     private void ProcessMovement()
@@ -56,8 +91,32 @@ public class Player : MonoBehaviour
                 m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
             }
         }
+    }
 
-
+    public void Respawn()
+    {
+        if(!m_respawning)
+        {
+            m_respawning = true;
+            m_timeRespawning = 0.0f;
+        }
+    }
+    public void ProcessRespawn()
+    {
+        //TODO fade
+        m_timeRespawning += Time.deltaTime;
+        if (m_timeRespawning < m_respawnTime * 0.5f)
+        {
+            
+        }
+        else if(m_timeRespawning < m_respawnTime)
+        {
+            gameObject.transform.position = m_checkpoint.transform.position;
+        }
+        else
+        {
+            m_respawning = false;
+        }
     }
 
     private bool IsGrounded()

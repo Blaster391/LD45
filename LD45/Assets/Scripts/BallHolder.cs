@@ -40,7 +40,7 @@ public class BallHolder : MonoBehaviour
     {
         if(!m_powerBall)
         {
-            if(_powerBall.Type == m_parentHolder.Type)
+            if(_powerBall.Selected && _powerBall.Type == m_parentHolder.Type)
             {
                 m_powerBall = _powerBall;
                 m_powerBall.Power(this);

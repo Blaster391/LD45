@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+		_OriginalTex("OriginalTex", 2D) = "white" {}
 		_point("Point", Vector) = (0.5,0.5,1,1)
 		_radius("Radius", Float) = 0.1
     }
@@ -32,12 +33,15 @@
             };
 
 			uniform sampler2D _MainTex;
+			uniform sampler2D _OriginalTex;
 			uniform float2 _point;
 			uniform float _radius;
+			uniform float _aspect;
 
 			float4 frag(v2f_img i) : COLOR{
 				float4 inColour = tex2D(_MainTex, i.uv);
 				float2 pointDiff = _point - i.uv;
+				pointDiff.x = pointDiff.x * ( _ScreenParams.x / _ScreenParams.y);
 
 				float power = _radius - sqrt(pointDiff.x * pointDiff.x + pointDiff.y * pointDiff.y);
 
@@ -46,8 +50,11 @@
 				{
 					//Do multicolour
 					power = power * 1 / _radius;
-					col = float4(power, power, power, 1) + inColour;
+				//	col = float4(power, power, power, 1) + inColour;
+					float4 originalCol = tex2D(_OriginalTex, i.uv);
+					col = (originalCol * power) + (inColour * (1 - power));
 				}
+				col.a = inColour.a;
 
                 return col;
             }
