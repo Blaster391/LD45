@@ -59,4 +59,13 @@ public class EndGameScript : MonoBehaviour
             return m_colours[randomIndex];
         }
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Player p = col.GetComponent<Player>();
+        if (p)
+        {
+            Camera.main.gameObject.GetComponent<ScreenFX>().Finished();
+        }
+    }
 }

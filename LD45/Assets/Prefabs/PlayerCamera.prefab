@@ -113,3 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4263ebb79ffada84c88be630ec829064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_power: {fileID: 0}
+  m_setOne:
+  - {r: 0, g: 1, b: 0, a: 0}
+  m_setTwo:
+  - {r: 0, g: 0, b: 1, a: 0}
+  m_setThree:
+  - {r: 1, g: 0, b: 0, a: 0}

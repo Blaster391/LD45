@@ -1,4 +1,4 @@
-﻿Shader "Hidden/PostProcessEffectShader"
+﻿Shader "Hidden/MultiColourShader"
 {
     Properties
     {
