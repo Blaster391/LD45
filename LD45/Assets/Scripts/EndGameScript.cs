@@ -55,7 +55,7 @@ public class EndGameScript : MonoBehaviour
         }
         else
         {
-            int randomIndex = Random.Range(0, m_colours.Count - 1);
+            int randomIndex = Random.Range(0, m_colours.Count);
             return m_colours[randomIndex];
         }
     }

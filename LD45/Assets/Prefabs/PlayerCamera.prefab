@@ -115,8 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_power: {fileID: 0}
   m_setOne:
-  - {r: 0, g: 1, b: 0, a: 0}
+  - {r: 1, g: 0.67569816, b: 0, a: 0}
   m_setTwo:
-  - {r: 0, g: 0, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0.9423084, a: 0}
   m_setThree:
-  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0, g: 1, b: 0.91761637, a: 0}
+  m_transitionSpeed: 5

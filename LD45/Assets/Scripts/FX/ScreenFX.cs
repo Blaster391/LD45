@@ -32,6 +32,14 @@ public class ScreenFX : MonoBehaviour
     [SerializeField]
     List<Color> m_setThree;
 
+    private int m_currentIndex = 0;
+    private int m_nextIndex = 0;
+
+    [SerializeField]
+    float m_transitionSpeed = 5.0f;
+
+    private float m_currentTransition = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +50,14 @@ public class ScreenFX : MonoBehaviour
         pointMultiColourFunkyMaterial = new Material(Shader.Find("Hidden/PointMultiColourFunkyShader"));
         passThroughMaterial = new Material(Shader.Find("Hidden/PassThroughShader"));
         finishedMaterial = new Material(Shader.Find("Hidden/FinishedShader"));
+
+        m_currentIndex = GetRandomIndex();
+        m_nextIndex = GetRandomIndex();
+    }
+
+    private int GetRandomIndex()
+    {
+        return Random.Range(0, m_setOne.Count);
     }
 
     public void Finished()
@@ -71,6 +87,22 @@ public class ScreenFX : MonoBehaviour
             return;
         }
 
+        m_currentTransition += Time.deltaTime;
+
+        if (m_currentTransition > m_transitionSpeed)
+        {
+            m_currentIndex = m_nextIndex;
+            m_nextIndex = GetRandomIndex();
+            m_currentTransition = 0.0f;
+        }
+
+        float lerpAmount = m_currentTransition / m_transitionSpeed;
+
+        Color color1 = Color.Lerp(m_setOne[m_currentIndex], m_setOne[m_nextIndex], lerpAmount);
+        Color color2 = Color.Lerp(m_setTwo[m_currentIndex], m_setTwo[m_nextIndex], lerpAmount);
+        Color color3 = Color.Lerp(m_setThree[m_currentIndex], m_setThree[m_nextIndex], lerpAmount);
+
+
         RenderTexture temp1 = RenderTexture.GetTemporary(source.width, source.height);
         RenderTexture temp2 = RenderTexture.GetTemporary(source.width, source.height);
 
@@ -87,9 +119,9 @@ public class ScreenFX : MonoBehaviour
         else if(m_power.CorePower.PowerLevel == 3)
         {
             mainScreenMaterial = funkyMaterial;
-            funkyMaterial.SetColor("_Colour_One", m_setOne[0]);
-            funkyMaterial.SetColor("_Colour_Two", m_setTwo[0]);
-            funkyMaterial.SetColor("_Colour_Three", m_setThree[0]);
+            funkyMaterial.SetColor("_Colour_One", color1);
+            funkyMaterial.SetColor("_Colour_Two", color2);
+            funkyMaterial.SetColor("_Colour_Three", color3);
         }
         Graphics.Blit(source, temp1, mainScreenMaterial);
 
@@ -137,9 +169,9 @@ public class ScreenFX : MonoBehaviour
                 if (endGame || ball.Type == PowerType.Core)
                 {
                     mat = pointMultiColourFunkyMaterial;
-                    mat.SetColor("_Colour_One", m_setThree[0]);
-                    mat.SetColor("_Colour_Two", m_setOne[0]);
-                    mat.SetColor("_Colour_Three", m_setTwo[0]);
+                    mat.SetColor("_Colour_One", color2);
+                    mat.SetColor("_Colour_Two", color3);
+                    mat.SetColor("_Colour_Three", color1);
                 }
 
                 mat.SetTexture("_OriginalTex", source);
