@@ -2095,26 +2095,6 @@ PrefabInstance:
       propertyPath: m_powerPanel
       value: 
       objectReference: {fileID: 1299633166503712649}
-    - target: {fileID: 1951935153057457512, guid: 26db29e958e503c45a75a55ef759a691,
-        type: 3}
-      propertyPath: m_movementForce
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1951935153057457512, guid: 26db29e958e503c45a75a55ef759a691,
-        type: 3}
-      propertyPath: m_jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1951935153057457512, guid: 26db29e958e503c45a75a55ef759a691,
-        type: 3}
-      propertyPath: m_doubleJumpForce
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1951935153057457512, guid: 26db29e958e503c45a75a55ef759a691,
-        type: 3}
-      propertyPath: m_dashForce
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1951935153057457518, guid: 26db29e958e503c45a75a55ef759a691,
         type: 3}
       propertyPath: m_Constraints
@@ -2575,6 +2555,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 72616520988913111, guid: c6052898a10f97e4c9ddda0d69d8e45c,
+        type: 3}
+      propertyPath: m_player
+      value: 
+      objectReference: {fileID: 180563780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6052898a10f97e4c9ddda0d69d8e45c, type: 3}
 --- !u!1001 &6586344568674859069

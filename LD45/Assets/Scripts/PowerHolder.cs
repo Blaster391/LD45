@@ -19,7 +19,7 @@ public class PowerHolder : MonoBehaviour
 
     public int PowerLevel { get { return m_holders.Count(x => x.Powered); } }
     public int MaxPower => m_maxPower;
-
+    public bool AtMaxPower { get { return PowerLevel == MaxPower; } }
     // Start is called before the first frame update
     void Start()
     {

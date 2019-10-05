@@ -9,14 +9,19 @@ public class ScreenFX : MonoBehaviour
 
     private List<GameObject> m_effectPoints = new List<GameObject>();
     private bool m_endGame = false;
+    private bool m_finished =  true;
+    private float m_finishedTime = 0.0f;
 
     private bool m_disable = false;
+   
 
     Material blackMaterial;
     Material blackAndWhiteMaterial;
 
     Material pointMultiColourMaterial;
     Material passThroughMaterial;
+    Material finishedMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,7 @@ public class ScreenFX : MonoBehaviour
         blackAndWhiteMaterial = new Material(Shader.Find("Hidden/BlackAndWhiteShader"));
         pointMultiColourMaterial = new Material(Shader.Find("Hidden/PointMultiColourShader"));
         passThroughMaterial = new Material(Shader.Find("Hidden/PassThroughShader"));
+        finishedMaterial = new Material(Shader.Find("Hidden/FinishedShader"));
     }
 
     public void AddPointFX(GameObject effectPoint)
@@ -33,7 +39,7 @@ public class ScreenFX : MonoBehaviour
 
     public void SetEndGame(bool end)
     {
-        m_endGame = true;
+        m_endGame = end;
     }
 
     public void SetDisabled(bool disabled)
@@ -69,7 +75,7 @@ public class ScreenFX : MonoBehaviour
         float radius = 0.2f;
         foreach (var point in m_effectPoints)
         {
-            if(m_endGame)
+            if(m_endGame && m_power.CorePower.PowerLevel == 0)
             {
                 radius = 0.6f;
                 EndGameScript endGame = point.GetComponent<EndGameScript>();
@@ -78,7 +84,7 @@ public class ScreenFX : MonoBehaviour
                     continue;
                 }
             }
-            if (m_power.CorePower.PowerLevel == 0)
+            else if (m_power.CorePower.PowerLevel == 0)
             {
                 EndGameScript endGame = point.GetComponent<EndGameScript>();
                 if (endGame)
@@ -107,6 +113,20 @@ public class ScreenFX : MonoBehaviour
                 to = from;
                 from = t;
             }
+        }
+
+
+
+        if(m_finished)
+        {
+
+            m_finishedTime += Time.deltaTime;
+            finishedMaterial.SetTexture("_OriginalTex", source);
+            finishedMaterial.SetFloat("_time", m_finishedTime);
+            Graphics.Blit(from, to, finishedMaterial);
+            RenderTexture t = to;
+            to = from;
+            from = t;
         }
 
         Graphics.Blit(from, destination, passThroughMaterial);
