@@ -332,6 +332,21 @@ PrefabInstance:
     - target: {fileID: 203651515169079543, guid: 2cb085c534df42546883f5c234124bc5,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231306429596516581, guid: 2cb085c534df42546883f5c234124bc5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367710484836407441, guid: 2cb085c534df42546883f5c234124bc5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 596862228313845590, guid: 2cb085c534df42546883f5c234124bc5,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []

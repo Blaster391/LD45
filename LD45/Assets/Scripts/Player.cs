@@ -118,8 +118,9 @@ public class Player : MonoBehaviour
     private void ProcessMovement()
     {
         bool moved = false;
+        bool grounded = IsGrounded();
 
-        if(m_dashing)
+        if (m_dashing)
         {
             
             m_timeSinceSpawnedDashGhost += Time.deltaTime;
@@ -145,22 +146,14 @@ public class Player : MonoBehaviour
                 moved = true;
             }
 
-            
-
             Vector2 movementForce = Vector2.right * Input.GetAxis("Horizontal") * m_movementForce;
-                
-
-            if(m_powerPanel.MovementPower.PowerLevel == 3)
+            
+            if(m_powerPanel.MovementPower.PowerLevel == 3 && !grounded)
             {
                 movementForce += Vector2.up * Input.GetAxis("Vertical") * m_movementForce * 0.25f;
-
-
             }
             m_rigidbody.AddForce(movementForce, ForceMode2D.Force);
-            
-
         }
-
 
         if (m_powerPanel.MovementPower.PowerLevel > 1)
         {
@@ -177,20 +170,28 @@ public class Player : MonoBehaviour
 
         if (m_powerPanel.JumpPower.PowerLevel > 0)
         {
+            if (m_powerPanel.JumpPower.PowerLevel == 2 && grounded)
+            {
+                m_hasDoubleJumped = false;
+            }
+
             if (Input.GetButtonDown("Jump"))
             {
-                if (IsGrounded())
+                if (grounded)
                 {
                     Vector2 jumpForce = Vector2.up * m_jumpForce;
                     m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
-                    m_hasDoubleJumped = false;
                 }
                 else if (m_powerPanel.JumpPower.PowerLevel == 2 && !m_hasDoubleJumped)
                 {
-                    m_hasDoubleJumped = true;
+                    Vector3 vel = m_rigidbody.velocity;
+                    vel.y = 0;
+                    m_rigidbody.velocity = vel;
+
                     Vector2 jumpForce = Vector2.up * m_doubleJumpForce;
                     m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
                     SpawnFadeout();
+                    m_hasDoubleJumped = true;
                 }
 
             }
@@ -208,7 +209,7 @@ public class Player : MonoBehaviour
         }
 
         //Drag
-        if(IsGrounded() && !moved)
+        if(grounded && !moved)
         {
             
             float drag = Time.deltaTime * 60;

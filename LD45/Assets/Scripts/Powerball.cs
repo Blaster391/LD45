@@ -166,6 +166,12 @@ public class Powerball : MonoBehaviour
         m_rotation += Time.deltaTime * m_rotateSpeed;
         //}
 
+
+
+    }
+
+    void LateUpdate()
+    {
         if (m_state == BallState.Held && gameObject.transform.parent)
         {
             m_lineRenderer.enabled = true;
@@ -183,7 +189,6 @@ public class Powerball : MonoBehaviour
             Vector3[] positions = { };
             m_lineRenderer.SetPositions(positions);
         }
-
     }
 
     void OnMouseOver()
