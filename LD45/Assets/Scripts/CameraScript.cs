@@ -5,6 +5,9 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     [SerializeField]
+    PowerPanel m_powerPanel;
+
+    [SerializeField]
     private GameObject m_player;
     [SerializeField]
     private float m_offset = 5;
@@ -18,6 +21,7 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         m_depth = gameObject.transform.position.z;
+        
     }
 
     // Update is called once per frame
@@ -36,5 +40,22 @@ public class CameraScript : MonoBehaviour
         position += velocityAdjust;
 
         gameObject.transform.position = position;
+
+        SortOutPowerPanel();
+
+    }
+
+    void SortOutPowerPanel()
+    {
+        Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0.0f, 10));
+
+        stageDimensions.x -= 1.5f;
+
+        m_powerPanel.gameObject.transform.position = stageDimensions;
+
+
+        Vector3 localPos = m_powerPanel.gameObject.transform.localPosition;
+        localPos.y = 0.0f;
+        m_powerPanel.gameObject.transform.localPosition = localPos;
     }
 }

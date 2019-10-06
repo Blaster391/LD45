@@ -186,8 +186,10 @@ public class Player : MonoBehaviour
     }
     public void ProcessRespawn()
     {
-        //TODO fade
         m_timeRespawning += Time.deltaTime;
+        m_rigidbody.velocity = new Vector3();
+        m_rigidbody.isKinematic = true;
+
         if (m_timeRespawning < m_respawnTime * 0.5f)
         {
            var color = m_renderer.material.color;
@@ -201,7 +203,7 @@ public class Player : MonoBehaviour
             var color = m_renderer.material.color;
             color.a = ((m_timeRespawning - m_respawnTime * 0.5f) / m_respawnTime  );
             m_renderer.material.color = color;
-            gameObject.transform.position = m_checkpoint.transform.position;
+            gameObject.transform.position = m_checkpoint.transform.position + new Vector3(0,1,0);
         }
         else
         {
@@ -209,6 +211,7 @@ public class Player : MonoBehaviour
             color.a = 1;
             m_renderer.material.color = color;
             m_respawning = false;
+            m_rigidbody.isKinematic = false;
         }
     }
 
