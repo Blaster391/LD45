@@ -28,6 +28,7 @@ public class Powerball : MonoBehaviour
     public BallState State => m_state;
 
     private BallHolder m_holder;
+    private LineRenderer m_lineRenderer;
 
     [SerializeField]
     BallState m_state;
@@ -71,6 +72,8 @@ public class Powerball : MonoBehaviour
         m_orbitDistance += m_orbitDistanceRand * Random.value;
 
         Camera.main.gameObject.GetComponent<ScreenFX>().AddPointFX(gameObject);
+
+        m_lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -103,6 +106,8 @@ public class Powerball : MonoBehaviour
                 {
                     targetPosition = m_player.PowerPanel.CoreTether.transform.position;
                     gameObject.transform.parent = m_player.PowerPanel.CoreTether.transform;
+
+
                 }
                 else if(m_type == PowerType.Ability)
                 {
@@ -138,6 +143,25 @@ public class Powerball : MonoBehaviour
         //{
             transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
         //}
+
+        if (m_state == BallState.Held && gameObject.transform.parent)
+        {
+            m_lineRenderer.enabled = true;
+            Vector3 lineFrom = gameObject.transform.position;
+            lineFrom.z = 100;
+            Vector3 lineTo = gameObject.transform.parent.transform.position;
+            lineTo.z = 100;
+
+            Vector3[] positions = { lineFrom, lineTo };
+            m_lineRenderer.SetPositions(positions);
+        }
+        else
+        {
+            m_lineRenderer.enabled = false;
+            Vector3[] positions = { };
+            m_lineRenderer.SetPositions(positions);
+        }
+
     }
 
     void OnMouseOver()
@@ -170,6 +194,19 @@ public class Powerball : MonoBehaviour
         if (m_state == BallState.InUse)
         {
             m_state = BallState.Held;
+
+            if (m_type == PowerType.Core)
+            {
+                gameObject.transform.parent = m_player.PowerPanel.CoreTether.transform;
+            }
+            else if (m_type == PowerType.Ability)
+            {
+                gameObject.transform.parent = m_player.PowerPanel.AbilityTether.transform;
+            }
+            else
+            {
+                gameObject.transform.parent = m_player.gameObject.transform;
+            }
         }
 
     }
