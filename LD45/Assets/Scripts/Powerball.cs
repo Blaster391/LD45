@@ -31,7 +31,7 @@ public class Powerball : MonoBehaviour
     private LineRenderer m_lineRenderer;
 
     [SerializeField]
-    BallState m_state;
+    private BallState m_state;
 
     [SerializeField]
     float m_moveSpeed = 5.0f;
@@ -58,8 +58,14 @@ public class Powerball : MonoBehaviour
     [SerializeField]
     float m_rotateSpeed = 1.0f;
 
+    [SerializeField]
     bool m_selected = false;
     public bool Selected { get { return m_selected; } }
+    public void Select()
+    {
+        Debug.Log("SELECTED");
+        m_selected = true;
+    }
 
     Vector3 startingScale = new Vector3(1, 1, 1);
 
@@ -188,16 +194,16 @@ public class Powerball : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
-    {
-        if(m_state != BallState.Free)
-        {
-            Debug.Log("HIT");
-            m_selected = true;
+    //void OnMouseDown()
+    //{
+    //    if(m_state != BallState.Free)
+    //    {
+    //        Debug.Log("HIT");
+    //        m_selected = true;
 
-        }
+    //    }
 
-    }
+    //}
 
     public void Release()
     {

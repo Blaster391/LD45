@@ -72,11 +72,33 @@ public class Player : MonoBehaviour
         else
         {
             ProcessMovement();
+            ProcessSelection();
         }
 
         if(transform.position.y < -25.0f)
         {
             Respawn();
+        }
+    }
+
+    public void ProcessSelection()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            var cursorPos = Input.mousePosition;
+            cursorPos.z = 0;
+            cursorPos = Camera.main.ScreenToWorldPoint(cursorPos);
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(cursorPos, Vector3.zero, 100);
+            foreach(var hit in hits)
+            {
+                Powerball p = hit.collider.gameObject.GetComponent<Powerball>();
+                if (p && p.State != BallState.Free)
+                {
+                    p.Select();
+                    return;
+                }
+            }
         }
     }
 
