@@ -55,6 +55,11 @@ public class Door : MonoBehaviour
             m_collider.enabled = true;
             m_renderer.enabled = true;
         }
+
+        if(m_closed && m_player)
+        {
+            m_player.Respawn();
+        }
     }
 
     void SetClosed(bool closed)
@@ -63,6 +68,27 @@ public class Door : MonoBehaviour
         {
 
             m_closed = closed;
+        }
+
+
+    }
+
+    Player m_player = null;
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Player p = col.GetComponent<Player>();
+        if (p)
+        {
+            m_player = p;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        Player p = col.GetComponent<Player>();
+        if (p)
+        {
+            m_player = null;
         }
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442e7857902aaf542ad9421389e2d645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxAge: 1
 --- !u!1001 &1876812385027096581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,6 +84,9 @@ PrefabInstance:
     - {fileID: 1951935153057457512, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
     - {fileID: 1951935153057457519, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
     - {fileID: 1951935153057457518, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
+    - {fileID: 8682343369196052580, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
+    - {fileID: 7946845048668870407, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
+    - {fileID: 6613245949934248844, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 26db29e958e503c45a75a55ef759a691, type: 3}
 --- !u!1 &80339414404719976 stripped
 GameObject:

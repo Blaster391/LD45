@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     public GameObject m_fadeout;
 
     [SerializeField]
-    private float m_maxMoveSpeed = 5;
+    private float m_maxHorizontalMoveSpeed = 5;
+    [SerializeField]
+    private float m_maxSpeed = 5;
     [SerializeField]
     private float m_movementForce = 5;
     [SerializeField]
@@ -115,6 +117,8 @@ public class Player : MonoBehaviour
 
     private void ProcessMovement()
     {
+        bool moved = false;
+
         if(m_dashing)
         {
             
@@ -136,16 +140,24 @@ public class Player : MonoBehaviour
 
         if (m_powerPanel.MovementPower.PowerLevel > 0)
         {
-            if (m_rigidbody.velocity.magnitude < m_maxMoveSpeed)
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.0f)
             {
-
-                Vector2 movementForce = Vector2.right * Input.GetAxis("Horizontal") * m_movementForce;
-                if(m_powerPanel.MovementPower.PowerLevel == 3)
-                {
-                    movementForce += Vector2.up * Input.GetAxis("Vertical") * m_movementForce * 0.25f;
-                }
-                m_rigidbody.AddForce(movementForce, ForceMode2D.Force);
+                moved = true;
             }
+
+            
+
+            Vector2 movementForce = Vector2.right * Input.GetAxis("Horizontal") * m_movementForce;
+                
+
+            if(m_powerPanel.MovementPower.PowerLevel == 3)
+            {
+                movementForce += Vector2.up * Input.GetAxis("Vertical") * m_movementForce * 0.25f;
+
+
+            }
+            m_rigidbody.AddForce(movementForce, ForceMode2D.Force);
+            
 
         }
 
@@ -194,6 +206,55 @@ public class Player : MonoBehaviour
                 m_rigidbody.gravityScale = m_startingGravity;
             }
         }
+
+        //Drag
+        if(IsGrounded() && !moved)
+        {
+            
+            float drag = Time.deltaTime * 60;
+            float xSpeed = m_rigidbody.velocity.x - (m_rigidbody.velocity.x * drag);
+            if (drag > 1)
+            {
+                xSpeed = 0;
+            }
+
+
+            Vector3 vel = m_rigidbody.velocity;
+            vel.x = 0;
+            m_rigidbody.velocity = vel;
+
+            Debug.Log(m_rigidbody.velocity);
+
+            if (Mathf.Abs(vel.x) < 0.3f)
+            {
+                vel.x = 0;
+                m_rigidbody.velocity = vel;
+            }
+        }
+
+        if(m_rigidbody.velocity.magnitude > m_maxSpeed)
+        {
+            Vector3 vel = m_rigidbody.velocity;
+            vel.Normalize();
+            m_rigidbody.velocity = vel * m_maxSpeed;
+        }
+
+        if(!m_dashing)
+        {
+            if (m_rigidbody.velocity.x > m_maxHorizontalMoveSpeed)
+            {
+                Vector3 vel = m_rigidbody.velocity;
+                vel.x = m_maxHorizontalMoveSpeed;
+                m_rigidbody.velocity = vel;
+            }
+            if (m_rigidbody.velocity.x < -m_maxHorizontalMoveSpeed)
+            {
+                Vector3 vel = m_rigidbody.velocity;
+                vel.x = -m_maxHorizontalMoveSpeed;
+                m_rigidbody.velocity = vel;
+            }
+        }
+
     }
 
     public void Respawn()
