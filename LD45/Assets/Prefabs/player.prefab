@@ -97,7 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_powerPanel: {fileID: 0}
   m_fadeout: {fileID: 80339414404719976, guid: 37874b8f6d4dc494b9c0454aef8c0985, type: 3}
-  m_maxMoveSpeed: 3
+  m_maxHorizontalMoveSpeed: 5
+  m_maxSpeed: 5
   m_movementForce: 100
   m_jumpForce: 5
   m_doubleJumpForce: 4
@@ -141,7 +142,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.006596148, y: 0.000000059604645}
+  m_Offset: {x: 0.006596148, y: -0.00004208088}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -152,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12463033, y: 0.39494455}
+  m_Size: {x: 0.12463033, y: 0.37626624}
   m_EdgeRadius: 0
 --- !u!58 &6613245949934248844
 CircleCollider2D:
@@ -167,6 +168,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0031210184, y: -0.0051587224}
+  m_Offset: {x: 0.0006547868, y: 0.0010306537}
   serializedVersion: 2
-  m_Radius: 0.21490437
+  m_Radius: 0.2045528
