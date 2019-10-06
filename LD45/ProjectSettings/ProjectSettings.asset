@@ -614,10 +614,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: a4e1c09e-2c83-427b-8ff5-dd638e9ee7bd
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: LD45
+  organizationId: plopdoo
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

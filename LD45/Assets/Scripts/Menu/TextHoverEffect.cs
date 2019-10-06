@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class EndGameTime : MonoBehaviour
@@ -20,6 +21,11 @@ public class EndGameTime : MonoBehaviour
         Destroy(timer);
         m_text = GetComponent<Text>();
         m_text.text = $"Submitted in {time} seconds";
+
+        Analytics.CustomEvent("Completed", new Dictionary<string, object>
+        {
+            { "time", time }
+        });
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Player : MonoBehaviour
 {
@@ -179,6 +180,8 @@ public class Player : MonoBehaviour
         {
             m_respawning = true;
             m_timeRespawning = 0.0f;
+
+            Analytics.CustomEvent("Dead", new Dictionary<string, object>{});
         }
     }
     public void ProcessRespawn()
