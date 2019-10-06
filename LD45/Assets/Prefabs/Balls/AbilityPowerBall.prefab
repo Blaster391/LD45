@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &12132786587873972
+--- !u!1001 &7844974592621201265
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,17 +10,17 @@ PrefabInstance:
     - target: {fileID: 2740757931467971188, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_Name
-      value: ExternalBall Variant
+      value: AbilityPowerBall
       objectReference: {fileID: 0}
     - target: {fileID: 2740757931467971190, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.769086
+      value: 3.1523848
       objectReference: {fileID: 0}
     - target: {fileID: 2740757931467971190, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8156102
+      value: -0.23756152
       objectReference: {fileID: 0}
     - target: {fileID: 2740757931467971190, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
@@ -70,27 +70,22 @@ PrefabInstance:
     - target: {fileID: 2740757931467971189, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2740757931467971189, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.15520048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2740757931467971189, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2662728789840008375, guid: 53900e0998f7d3648b30b65014131c65,
         type: 3}
       propertyPath: m_type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662728789840008375, guid: 53900e0998f7d3648b30b65014131c65,
-        type: 3}
-      propertyPath: m_orbitDistance
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53900e0998f7d3648b30b65014131c65, type: 3}

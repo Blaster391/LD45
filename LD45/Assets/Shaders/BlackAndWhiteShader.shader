@@ -43,12 +43,12 @@
 				//total = total / 3;
 				float4 col = fixed4(base, base, base, 1) * baseAmount + inColour * colourAmount;
 
-				if (inColour.r < 0.5f && base > 0.5f)
+		/*		if (inColour.r < 0.5f && base > 0.5f)
 				{
 					float4 brown = float4(0.5, 0.2, 0.16, 1);
 
 					col = brown * base;;
-				}
+				}*/
 
                 return col;
             }

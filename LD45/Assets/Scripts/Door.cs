@@ -7,6 +7,11 @@ public class Door : MonoBehaviour
     [SerializeField]
     private PowerHolder m_holder;
 
+    [SerializeField]
+    private float m_fadeSpeed = 1.0f;
+
+    private float m_currentFade = 0.0f;
+
     bool m_closed = true;
 
     private Renderer m_renderer;
@@ -25,22 +30,37 @@ public class Door : MonoBehaviour
         {
             SetClosed(m_holder.PowerLevel != m_holder.MaxPower);
         }
+
+        if(m_closed)
+        {
+            m_currentFade += m_fadeSpeed * Time.deltaTime;
+        }
+        else
+        {
+            m_currentFade -= m_fadeSpeed * Time.deltaTime;
+        }
+        m_currentFade = Mathf.Clamp01(m_currentFade);
+
+        var color = m_renderer.material.color;
+        color.a = m_currentFade;
+        m_renderer.material.color = color;
+
+        if(m_currentFade <= 0.0f)
+        {
+            m_collider.enabled = false;
+            m_renderer.enabled = false;
+        }
+        else
+        {
+            m_collider.enabled = true;
+            m_renderer.enabled = true;
+        }
     }
 
     void SetClosed(bool closed)
     {
         if (closed != m_closed)
         {
-            if(closed)
-            {
-                m_collider.enabled = true;
-                m_renderer.enabled  = true;
-            }
-            else
-            {
-                m_collider.enabled = false;
-                m_renderer.enabled = false;
-            }
 
             m_closed = closed;
         }

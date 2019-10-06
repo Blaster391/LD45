@@ -116,8 +116,18 @@ MonoBehaviour:
   m_power: {fileID: 0}
   m_setOne:
   - {r: 1, g: 0.67569816, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0, g: 1, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.5728283, a: 0}
   m_setTwo:
   - {r: 1, g: 0, b: 0.9423084, a: 0}
+  - {r: 0, g: 1, b: 0, a: 0}
+  - {r: 0, g: 0, b: 1, a: 0}
+  - {r: 0.96860325, g: 1, b: 0, a: 0}
   m_setThree:
   - {r: 0, g: 1, b: 0.91761637, a: 0}
-  m_transitionSpeed: 5
+  - {r: 0, g: 0, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.67763186, b: 1, a: 1}
+  m_transitionSpeed: 3
+  m_pulseSpeed: 0.4

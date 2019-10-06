@@ -40,6 +40,10 @@ public class ScreenFX : MonoBehaviour
 
     private float m_currentTransition = 0.0f;
 
+    [SerializeField]
+    float m_pulseSpeed = 2.9f;
+    private float m_currentPulse = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +98,21 @@ public class ScreenFX : MonoBehaviour
             m_currentIndex = m_nextIndex;
             m_nextIndex = GetRandomIndex();
             m_currentTransition = 0.0f;
+
+            if(m_nextIndex == m_currentIndex)
+            {
+                m_nextIndex++;
+                if(m_nextIndex >= m_setOne.Count)
+                {
+                    m_nextIndex = 0;
+                }
+            }
+        }
+
+        m_currentPulse += Time.deltaTime * m_pulseSpeed;
+        if(m_currentPulse > 1)
+        {
+            m_currentPulse = -1;
         }
 
         float lerpAmount = m_currentTransition / m_transitionSpeed;
@@ -165,6 +184,8 @@ public class ScreenFX : MonoBehaviour
 
             if((pos.x > -1 || pos.x < 2) && (pos.y > -1 || pos.y < 2))
             {
+                radius = radius * Mathf.Abs(m_currentPulse);
+
                 Material mat = pointMultiColourMaterial;
                 if (endGame || ball.Type == PowerType.Core)
                 {

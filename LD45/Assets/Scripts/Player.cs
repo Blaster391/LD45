@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     private float m_timeSinceDashed = 0.0f;
     private float m_timeSinceSpawnedDashGhost = 0.0f;
 
+    private Renderer m_renderer;
     private BoxCollider2D m_collider;
     private Rigidbody2D m_rigidbody;
     private float m_groundedThreshold = 0.1f;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        m_renderer = GetComponent<Renderer>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_collider = GetComponent<BoxCollider2D>();
 
@@ -185,14 +187,24 @@ public class Player : MonoBehaviour
         m_timeRespawning += Time.deltaTime;
         if (m_timeRespawning < m_respawnTime * 0.5f)
         {
-            
+           var color = m_renderer.material.color;
+            color.a = 1 - (m_timeRespawning / m_respawnTime * 0.5f);
+            m_renderer.material.color = color;
+
+
         }
         else if(m_timeRespawning < m_respawnTime)
         {
+            var color = m_renderer.material.color;
+            color.a = ((m_timeRespawning - m_respawnTime * 0.5f) / m_respawnTime  );
+            m_renderer.material.color = color;
             gameObject.transform.position = m_checkpoint.transform.position;
         }
         else
         {
+            var color = m_renderer.material.color;
+            color.a = 1;
+            m_renderer.material.color = color;
             m_respawning = false;
         }
     }

@@ -100,10 +100,10 @@ MonoBehaviour:
   m_movementForce: 4
   m_jumpForce: 5
   m_doubleJumpForce: 4
-  m_dashCooldown: 3
-  m_dashForce: 4
-  m_dashGhostRate: 0.1
-  m_dashGhostTime: 1
+  m_dashCooldown: 2
+  m_dashForce: 5
+  m_dashGhostRate: 0.15
+  m_dashGhostTime: 0.75
   m_respawnTime: 3
   m_checkpoint: {fileID: 0}
 --- !u!61 &1951935153057457519

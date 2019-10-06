@@ -61,10 +61,13 @@ public class Powerball : MonoBehaviour
     bool m_selected = false;
     public bool Selected { get { return m_selected; } }
 
+    Vector3 startingScale = new Vector3(1, 1, 1);
+
     // Start is called before the first frame update
     void Start()
     {
         m_startingPosition = gameObject.transform.position;
+        startingScale = gameObject.transform.localScale;
         m_currentOrbit = Random.value * Mathf.PI * 2;
         m_currentBob = Random.value * Mathf.PI * 2;
 
@@ -79,6 +82,11 @@ public class Powerball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //This is dumb
+        Transform ogParent = gameObject.transform.parent;
+        gameObject.transform.parent = null;
+        gameObject.transform.localScale = startingScale;
+        gameObject.transform.parent = ogParent;
 
         if (m_selected)
         {
