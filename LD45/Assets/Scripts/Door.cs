@@ -76,6 +76,11 @@ public class Door : MonoBehaviour
     Player m_player = null;
     void OnTriggerEnter2D(Collider2D col)
     {
+        if(col.isTrigger)
+        {
+            return;
+        }
+
         Player p = col.GetComponent<Player>();
         if (p)
         {
@@ -85,6 +90,10 @@ public class Door : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
+        if (col.isTrigger)
+        {
+            return;
+        }
         Player p = col.GetComponent<Player>();
         if (p)
         {

@@ -67,7 +67,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_respawning)
+        
+        if (m_respawning)
         {
             ProcessRespawn();
         }
@@ -81,6 +82,8 @@ public class Player : MonoBehaviour
         {
             Respawn();
         }
+
+        ProcessMusic();
     }
 
     public void ProcessSelection()
@@ -104,6 +107,41 @@ public class Player : MonoBehaviour
         }
     }
 
+    AudioClip m_currentlyPlaying;
+
+    private void ProcessMusic()
+    {
+        if(Camera.main.GetComponent<ScreenFX>().m_finished)
+        {
+            return;
+        }
+
+        AudioClip newClip = null;
+        if (m_powerPanel.CorePower.PowerLevel == 0)
+        {
+            newClip = null;
+        }
+        if(m_powerPanel.CorePower.PowerLevel == 1)
+        {
+            newClip = Audio.AUDIO.m_lowPowerMusic;
+        }
+        if (m_powerPanel.CorePower.PowerLevel == 2)
+        {
+            newClip = Audio.AUDIO.m_midPowerMusic;
+        }
+        if (m_powerPanel.CorePower.PowerLevel == 3)
+        {
+            newClip = Audio.AUDIO.m_highPowerMusic;
+        }
+
+        if (newClip != m_currentlyPlaying)
+        {
+            m_currentlyPlaying = newClip;
+            Audio.AUDIO.SetMusic(m_currentlyPlaying);
+        }
+
+    }
+
     public void SetCheckpoint(Checkpoint _checkpoint)
     {
         if(m_checkpoint == _checkpoint)
@@ -121,9 +159,10 @@ public class Player : MonoBehaviour
         m_checkpoint = _checkpoint;
         m_checkpoint.SetActive();
     }
-
+    float jumpTime = 0.0f;
     private void ProcessMovement()
     {
+        jumpTime += Time.deltaTime;
         bool moved = false;
         bool grounded = IsGrounded();
 
@@ -187,11 +226,12 @@ public class Player : MonoBehaviour
             {
                 if (grounded)
                 {
+                    jumpTime = 0.0f;
                     Vector2 jumpForce = Vector2.up * m_jumpForce;
                     m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
                     Audio.AUDIO.PlayClip(Audio.AUDIO.m_jump);
                 }
-                else if (m_powerPanel.JumpPower.PowerLevel == 2 && !m_hasDoubleJumped)
+                else if (m_powerPanel.JumpPower.PowerLevel == 2 && !m_hasDoubleJumped && jumpTime > 0.2f)
                 {
                     Vector3 vel = m_rigidbody.velocity;
                     vel.y = 0;

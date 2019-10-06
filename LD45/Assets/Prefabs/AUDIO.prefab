@@ -43,7 +43,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -170,7 +170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -297,9 +297,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -424,7 +424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -560,6 +560,10 @@ MonoBehaviour:
   - {fileID: 4963768811491390612}
   - {fileID: 8345519781639831308}
   - {fileID: 4696040921358701587}
+  m_lowPowerMusic: {fileID: 8300000, guid: e55bf5af383d99844a09b3e4330cc70a, type: 3}
+  m_midPowerMusic: {fileID: 8300000, guid: 019beebad67df5547af0af5b57dc8889, type: 3}
+  m_highPowerMusic: {fileID: 8300000, guid: e79ef43e1d996804297062f05fc92c0f, type: 3}
+  m_endGameMusic: {fileID: 8300000, guid: 8dea3cf06e7530945a3e1aacea2c1fd5, type: 3}
   m_hoverSound: {fileID: 8300000, guid: 3624f70951ed8844eaf308254d94b6f9, type: 3}
   m_death: {fileID: 8300000, guid: e32ccad438f791f48a3f22f6b01a3d71, type: 3}
   m_checkpoint: {fileID: 8300000, guid: f0af2bf96f8751a4aba9736ae33fc893, type: 3}

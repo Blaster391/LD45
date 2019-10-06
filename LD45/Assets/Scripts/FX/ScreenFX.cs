@@ -12,7 +12,7 @@ public class ScreenFX : MonoBehaviour
     private List<GameObject> m_effectPoints = new List<GameObject>();
     public bool EndGame => m_endGame;
     private bool m_endGame = false;
-    private bool m_finished =  false;
+    public bool m_finished =  false;
     private float m_finishedTime = 0.0f;
 
     private bool m_disable = false;
@@ -68,7 +68,12 @@ public class ScreenFX : MonoBehaviour
 
     public void Finished()
     {
-        m_finished = true;
+        if(!m_finished)
+        {
+            m_finished = true;
+            Audio.AUDIO.SetMusic(Audio.AUDIO.m_endGameMusic);
+        }
+       
     }
 
     public void AddPointFX(GameObject effectPoint)

@@ -14,6 +14,12 @@ public class Audio : MonoBehaviour
     [SerializeField]
     private List<AudioSource> m_sfxSources;
 
+    public AudioClip m_lowPowerMusic;
+    public AudioClip m_midPowerMusic;
+    public AudioClip m_highPowerMusic;
+    public AudioClip m_endGameMusic;
+
+
     public AudioClip m_hoverSound;
     public AudioClip m_death;
     public AudioClip m_checkpoint;
@@ -46,10 +52,21 @@ public class Audio : MonoBehaviour
         gameObject.transform.position = Camera.main.transform.position;
     }
 
+    
     public void SetMusic(AudioClip clip)
     {
-        m_musicSource.clip = clip;
-        m_musicSource.Play();
+        if(clip == null)
+        {
+            Debug.Log("NULL");
+            m_musicSource.Stop();
+        }
+        else
+        {
+            Debug.Log("Playing");
+            m_musicSource.clip = clip;
+            m_musicSource.Play();
+            m_musicSource.loop = clip != m_endGameMusic;
+        }
     }
 
     public void PlayClip(AudioClip clip)
