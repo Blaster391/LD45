@@ -11,6 +11,12 @@ public class Timer : MonoBehaviour
     {
         m_time = 0.0f;
         DontDestroyOnLoad(gameObject);
+
+        GameObject timer = GameObject.Find("Timer");
+        if(timer && timer != gameObject)
+        {
+            Destroy(timer);
+        }
     }
 
     // Update is called once per frame

@@ -7,6 +7,13 @@ public class MainMenu : MonoBehaviour
 {
     public void Begin()
     {
+        GameObject timer = GameObject.Find("Timer");
+        if (timer)
+        {
+            Destroy(timer);
+        }
+        
+
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 

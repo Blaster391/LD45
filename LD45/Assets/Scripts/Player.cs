@@ -53,6 +53,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         m_renderer = GetComponent<Renderer>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_collider = GetComponent<BoxCollider2D>();
@@ -196,7 +198,7 @@ public class Player : MonoBehaviour
             
             if(m_powerPanel.MovementPower.PowerLevel == 3 && !grounded)
             {
-                movementForce += Vector2.up * Input.GetAxis("Vertical") * m_movementForce * 0.25f;
+                movementForce += Vector2.up * Input.GetAxis("Vertical") * m_movementForce * 0.5f;
             }
             m_rigidbody.AddForce(movementForce, ForceMode2D.Force);
         }

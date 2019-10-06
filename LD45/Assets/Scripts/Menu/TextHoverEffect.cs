@@ -17,8 +17,9 @@ public class EndGameTime : MonoBehaviour
         if(timer)
         {
             time = Mathf.RoundToInt(timer.GetComponent<Timer>().m_time);
+            Destroy(timer);
         }
-        Destroy(timer);
+        
         m_text = GetComponent<Text>();
         m_text.text = $"Submitted in {time} seconds";
 
