@@ -20,6 +20,9 @@ public class PowerHolder : MonoBehaviour
     public int PowerLevel { get { return m_holders.Count(x => x.Powered); } }
     public int MaxPower => m_maxPower;
     public bool AtMaxPower { get { return PowerLevel == MaxPower; } }
+
+    [SerializeField]
+    private List<GameObject> m_icons;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,15 @@ public class PowerHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for(int i = 0; i < MaxPower; ++i)
+        {
+            if(m_icons.Count == i)
+            {
+                break;
+            }
+
+            m_icons[i].gameObject.SetActive(PowerLevel > i);
+        }
         
     }
 }

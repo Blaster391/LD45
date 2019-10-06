@@ -20,7 +20,7 @@ public class EndGameDoor : MonoBehaviour
 
     bool m_doorOpen = false;
 
-    bool m_playerPoximity = true;
+    bool m_playerPoximity = false;
 
     private float m_currentOpenAmount = 0.0f;
 

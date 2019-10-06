@@ -87,5 +87,20 @@ PrefabInstance:
       propertyPath: m_type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2662728789840008375, guid: 53900e0998f7d3648b30b65014131c65,
+        type: 3}
+      propertyPath: m_orbitDistanceRand
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662728789840008375, guid: 53900e0998f7d3648b30b65014131c65,
+        type: 3}
+      propertyPath: m_orbitDistance
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662728789840008375, guid: 53900e0998f7d3648b30b65014131c65,
+        type: 3}
+      propertyPath: m_orbitSpeedRand
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53900e0998f7d3648b30b65014131c65, type: 3}
