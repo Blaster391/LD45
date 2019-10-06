@@ -66,7 +66,7 @@ public class Door : MonoBehaviour
     {
         if (closed != m_closed)
         {
-
+            Audio.AUDIO.PlayClip(Audio.AUDIO.m_door);
             m_closed = closed;
         }
 

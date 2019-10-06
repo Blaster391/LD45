@@ -216,6 +216,7 @@ public class Powerball : MonoBehaviour
         {
             m_holder = null;
             gameObject.transform.SetParent(null);
+            Audio.AUDIO.PlayClip(Audio.AUDIO.m_unequip);
         }
 
         if (m_state == BallState.InUse)
@@ -245,6 +246,7 @@ public class Powerball : MonoBehaviour
             m_holder = ballHolder;
             m_state = BallState.InUse;
             gameObject.transform.SetParent(m_holder.transform);
+            Audio.AUDIO.PlayClip(Audio.AUDIO.m_equip);
         }
     }
 

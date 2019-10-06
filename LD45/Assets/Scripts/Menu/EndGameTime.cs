@@ -26,6 +26,8 @@ public class TextHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         m_text.color = m_hoverColor;
+
+        Audio.AUDIO.PlayClip(Audio.AUDIO.m_hoverSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)

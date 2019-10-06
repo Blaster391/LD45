@@ -106,10 +106,17 @@ public class Player : MonoBehaviour
 
     public void SetCheckpoint(Checkpoint _checkpoint)
     {
+        if(m_checkpoint == _checkpoint)
+        {
+            return;
+        }
+
         if (m_checkpoint)
         {
             m_checkpoint.SetInactive();
         }
+
+        Audio.AUDIO.PlayClip(Audio.AUDIO.m_checkpoint);
 
         m_checkpoint = _checkpoint;
         m_checkpoint.SetActive();
@@ -165,6 +172,7 @@ public class Player : MonoBehaviour
                 m_dashing = true;
                 m_timeSinceDashed = 0.0f;
                 m_timeSinceSpawnedDashGhost = 0.0f;
+                Audio.AUDIO.PlayClip(Audio.AUDIO.m_dash);
             }
         }
 
@@ -181,6 +189,7 @@ public class Player : MonoBehaviour
                 {
                     Vector2 jumpForce = Vector2.up * m_jumpForce;
                     m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
+                    Audio.AUDIO.PlayClip(Audio.AUDIO.m_jump);
                 }
                 else if (m_powerPanel.JumpPower.PowerLevel == 2 && !m_hasDoubleJumped)
                 {
@@ -192,6 +201,7 @@ public class Player : MonoBehaviour
                     m_rigidbody.AddForce(jumpForce, ForceMode2D.Impulse);
                     SpawnFadeout();
                     m_hasDoubleJumped = true;
+                    Audio.AUDIO.PlayClip(Audio.AUDIO.m_jump);
                 }
 
             }
@@ -223,8 +233,6 @@ public class Player : MonoBehaviour
             Vector3 vel = m_rigidbody.velocity;
             vel.x = 0;
             m_rigidbody.velocity = vel;
-
-            Debug.Log(m_rigidbody.velocity);
 
             if (Mathf.Abs(vel.x) < 0.3f)
             {
@@ -266,6 +274,7 @@ public class Player : MonoBehaviour
             m_timeRespawning = 0.0f;
 
             Analytics.CustomEvent("Dead", new Dictionary<string, object>{});
+            Audio.AUDIO.PlayClip(Audio.AUDIO.m_death);
         }
     }
     public void ProcessRespawn()

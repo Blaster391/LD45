@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_powerPanel: {fileID: 8418243145051024041}
+  m_portal: {fileID: 0}
   m_player: {fileID: 0}
   m_offset: 3
   m_velocityAdjustScale: 0.1
