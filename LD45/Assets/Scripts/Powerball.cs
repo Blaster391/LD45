@@ -77,7 +77,13 @@ public class Powerball : MonoBehaviour
         Camera.main.gameObject.GetComponent<ScreenFX>().AddPointFX(gameObject);
 
         m_lineRenderer = GetComponent<LineRenderer>();
+
+        m_rotateSpeed = m_rotateSpeed * (Random.value - 0.5f) * 2.0f;
+
+        m_rotation = 360;
     }
+
+    float m_rotation = 0.0f;
 
     // Update is called once per frame
     void Update()
@@ -149,7 +155,9 @@ public class Powerball : MonoBehaviour
 
         //if (m_state != BallState.InUse)
         //{
-            transform.Rotate(new Vector3(0, 0, m_rotateSpeed * Time.deltaTime));
+        gameObject.transform.rotation = Quaternion.Euler(0,0, m_rotation);
+
+        m_rotation += Time.deltaTime * m_rotateSpeed;
         //}
 
         if (m_state == BallState.Held && gameObject.transform.parent)

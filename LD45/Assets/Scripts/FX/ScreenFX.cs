@@ -209,7 +209,7 @@ public class ScreenFX : MonoBehaviour
 
         if(m_finished)
         {
-
+            m_power.gameObject.SetActive(false);
             m_finishedTime += Time.deltaTime;
             finishedMaterial.SetTexture("_OriginalTex", source);
             finishedMaterial.SetFloat("_time", m_finishedTime);

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_poweredSprite: {fileID: 21300000, guid: be69d0bf979903747a28a21ce73e3003, type: 3}
-  m_unpoweredSprite: {fileID: 21300000, guid: de78fa4916e1f7144a015519c17e72dd, type: 3}
+  m_unpoweredSprite: {fileID: 21300000, guid: 8bbd697a2ef036343ae527bb90752662, type: 3}
 --- !u!1001 &331540439882491914
 PrefabInstance:
   m_ObjectHideFlags: 0

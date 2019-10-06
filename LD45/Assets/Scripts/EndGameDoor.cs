@@ -20,6 +20,8 @@ public class EndGameDoor : MonoBehaviour
 
     bool m_doorOpen = false;
 
+    bool m_playerPoximity = true;
+
     private float m_currentOpenAmount = 0.0f;
 
     // Start is called before the first frame update
@@ -32,7 +34,7 @@ public class EndGameDoor : MonoBehaviour
     
     void Update()
     {
-        m_doorOpen = m_player.PowerPanel.CorePower.AtMaxPower;
+        m_doorOpen = m_player.PowerPanel.CorePower.AtMaxPower && m_playerPoximity;
         if (m_doorOpen)
         {
             m_currentOpenAmount += Time.deltaTime *  m_openSpeed;
@@ -54,5 +56,22 @@ public class EndGameDoor : MonoBehaviour
         m_topDoor.gameObject.transform.position = m_topDoorPosition + Vector3.up * m_currentOpenAmount;
     }
 
-    
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Player p = col.GetComponent<Player>();
+        if (p)
+        {
+            m_playerPoximity = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        Player p = col.GetComponent<Player>();
+        if (p)
+        {
+            m_playerPoximity = false;
+        }
+    }
+
 }
