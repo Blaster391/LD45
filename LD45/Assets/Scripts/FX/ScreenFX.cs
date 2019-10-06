@@ -169,7 +169,7 @@ public class ScreenFX : MonoBehaviour
             else if (m_power.CorePower.PowerLevel == 0)
             {
                 
-                if (m_endGame || !ball || ball.Type != PowerType.Core || ball.State == BallState.Free)
+                if (/*m_endGame || */!ball || ball.Type != PowerType.Core || ball.State == BallState.Free)
                 {
                     continue;
                 }
