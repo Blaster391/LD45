@@ -10,6 +10,7 @@ public class ScreenFX : MonoBehaviour
     private PowerPanel m_power;
 
     private List<GameObject> m_effectPoints = new List<GameObject>();
+    public bool EndGame => m_endGame;
     private bool m_endGame = false;
     private bool m_finished =  false;
     private float m_finishedTime = 0.0f;
@@ -158,7 +159,7 @@ public class ScreenFX : MonoBehaviour
             Powerball ball = point.GetComponent<Powerball>();
             if (endGame)
             {
-                radius = 0.3f;
+                radius = 0.7f;
                 
                 //if (!m_endGame)
                 //{
